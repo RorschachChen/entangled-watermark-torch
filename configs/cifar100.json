@@ -1,0 +1,20 @@
+{
+  "model_type": "resnet",
+  "ratio": 15,
+  "batch_size": 128,
+  "epochs": 100,
+  "w_epochs": 8,
+  "factors": [1e5, 1e5, 1e5],
+  "temperatures": [1, 1, 1],
+  "metric": "cosine",
+  "threshold": 0.1,
+  "t_lr": 0.01,
+  "w_lr": 0.01,
+  "source": 8,
+  "target": 0,
+  "maxiter": 100,
+  "distribution": "out",
+  "layers": 18,
+  "input_channel": 3,
+  "output_channel": 100
+}

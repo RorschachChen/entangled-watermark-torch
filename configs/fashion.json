@@ -1,0 +1,19 @@
+{
+  "model_type": "2_conv",
+  "ratio": 2,
+  "batch_size": 128,
+  "epochs": 10,
+  "w_epochs": 10,
+  "factors": [32, 32, 32],
+  "temperatures": [1, 1, 1],
+  "metric": "cosine",
+  "threshold": 0.1,
+  "t_lr": 0.1,
+  "w_lr": 0.01,
+  "source": 8,
+  "target": 0,
+  "maxiter": 10,
+  "distribution": "out",
+  "input_channel": 1,
+  "output_channel": 10
+}

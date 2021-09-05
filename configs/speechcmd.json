@@ -1,0 +1,16 @@
+{
+  "model_type": "lstm",
+  "ratio": 1,
+  "batch_size": 128,
+  "epochs": 30,
+  "w_epochs": 1,
+  "factors": [16, 16, 16],
+  "temperatures": [30, 30, 30],
+  "threshold": 0.1,
+  "t_lr": 2,
+  "source": 9,
+  "target": 5,
+  "maxiter": 10,
+  "distribution": "in",
+  "shuffle": 1
+}

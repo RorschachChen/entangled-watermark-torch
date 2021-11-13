@@ -10,7 +10,6 @@ class BaseModel(nn.Module):
             temperatures = []
         self.input_channel = input_channel
         self.output_channel = output_channel
-        self.activations = []
         self.factors = factors
         self.metric = metric
         self.temperatures = temperatures
@@ -23,7 +22,19 @@ class BaseModel(nn.Module):
             inv_temperatures = [100.0 / i for i in temperateure_tensor]
         else:
             inv_temperatures = [100.0 / i for i in self.temperatures]
-        losses = [calculate_snnl_torch(activations[i], w, inv_temperatures[i]).requires_grad_() for i in range(len(activations))]
+        losses = [calculate_snnl_torch(activations[i], w, inv_temperatures[i]).requires_grad_() for i in
+                  range(len(activations))]
+        return losses
+
+    def snnl_trigger(self, x, w, temperateure_tensor=None):
+        output = self.forward(x, True)
+        activations = [output[i] for i in self.layers]
+        if temperateure_tensor is not None:
+            inv_temperatures = [100.0 / i for i in temperateure_tensor]
+        else:
+            inv_temperatures = [100.0 / i for i in self.temperatures]
+        losses = [calculate_snnl_torch(activations[i], w, inv_temperatures[i]).requires_grad_() for i in
+                  range(len(activations))]
         return losses
 
 

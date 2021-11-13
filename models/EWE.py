@@ -17,9 +17,10 @@ class EWE_2_conv(BaseModel):
         self.fc2 = nn.Linear(128, output_channel)
         self.layers = [0, 1, 2]
 
-    def forward(self, x):
+    def forward(self, x, per=False):
         B, H, W, C = x.shape
-        x = x.permute(0, 3, 1, 2)
+        if per:
+            x = x.permute(0, 3, 1, 2)
         x = self.conv1(x)
         s1 = x
         x = F.relu(x)
@@ -36,8 +37,7 @@ class EWE_2_conv(BaseModel):
         s3 = x
         x = F.relu(x)
         x = self.fc2(x)
-        self.activations = [s1, s2, s3]
-        return x
+        return [s1, s2, s3, x]
 
 
 class EWE_LSTM(BaseModel):
@@ -100,9 +100,10 @@ class Plain_2_conv(BaseModel):
         self.fc1 = nn.Linear(1600, 128)
         self.fc2 = nn.Linear(128, 10)
 
-    def forward(self, x):
+    def forward(self, x, per=False):
         B, H, W, C = x.shape
-        x = x.permute(0, 3, 1, 2)
+        if per:
+            x = x.permute(0, 3, 1, 2)
         conv1 = self.conv1(x)
         x = F.max_pool2d(conv1, (2, 2), 2)
         x = F.dropout(x)
